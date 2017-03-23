@@ -3,6 +3,7 @@ package negocios.admInventario;
 
 import java.util.List;
 import objetosNegocio.Apartado;
+import objetosNegocio.Modelo;
 import objetosNegocio.Talla;
 import pvcco.interfaces.IntAdmInventario;
 
@@ -89,7 +90,57 @@ public class FacAdmInventario implements IntAdmInventario{
      */
     @Override
     public void movimientoEnInventarioPorVenta(List<Talla> productos, List<Integer> cantidades) {
-        inv.movimientoEnInventarioPorVenta(productos, cantidades);
+        //inv.movimientoEnInventarioPorVenta(productos, cantidades);
+    }
+
+    /**
+     * Busca una talla existente con el mismo ID dado por el parametro.
+     * En caso de que no se encuentre se regresara nulo.
+     * 
+     * @param talla La talla con el ID a buscar.
+     * @return La talla en la base de datos si es que existe.
+     * 
+     * @throws Exception 
+     */
+    @Override
+    public Talla obten(Talla talla) throws Exception {
+        return inv.obten(talla);
+    }
+
+     /**
+     * Busca un modelo existente con el mismo ID dado por el parametro.
+     * En caso de que no se encuentre se regresara nulo.
+     * 
+     * @param talla El modelo con el ID a buscar.
+     * @return El modelo en la base de datos si es que existe.
+     * 
+     * @throws Exception 
+     */
+    @Override
+    public Modelo obten(Modelo modelo) throws Exception {
+        return inv.obten(modelo);
+    }
+
+    /**
+     * Regresa una lista de todos los registros en Tallas.
+     * 
+     * @return La lista de todas las tallas existentes.
+     * @throws Exception 
+     */
+    @Override
+    public List<Talla> obtenListaTallas() throws Exception {
+        return inv.obtenListaTallas();
+    }
+    
+    /**
+     * Regresa una lista de todos los registros en Modelos.
+     * 
+     * @return La lista de todos los modelos existentes.
+     * @throws Exception 
+     */
+    @Override
+    public List<Modelo> obtenListaModelos() throws Exception {
+        return inv.obtenListaModelos();
     }
 
 }
