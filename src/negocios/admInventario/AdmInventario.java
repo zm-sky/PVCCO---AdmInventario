@@ -46,6 +46,15 @@ public class AdmInventario {
             }
         }
 
+        /**
+         * Se trae el modelo con el mismo id que el modelo de la talla, si el
+         * modelo no existe este se agrega a la base de datos.
+         */
+        Modelo modeloExistente = persistencia.obten(talla.getIdModelo());
+        if (modeloExistente == null) {
+            persistencia.agregar(talla.getIdModelo());
+        }
+
         //Si no existe, simplemente vamos a agregar un nuevo registro de la talla.
         persistencia.agregar(talla);
     }
@@ -186,7 +195,7 @@ public class AdmInventario {
      */
     public Talla obten(Talla talla) throws Exception {
         IntPersistencia persistencia = new Persistencia();
-        
+
         return persistencia.obten(talla);
     }
 
@@ -201,7 +210,7 @@ public class AdmInventario {
      */
     public Modelo obten(Modelo modelo) throws Exception {
         IntPersistencia persistencia = new Persistencia();
-        
+
         return persistencia.obten(modelo);
     }
 
@@ -213,7 +222,7 @@ public class AdmInventario {
      */
     public List<Talla> obtenListaTallas() throws Exception {
         IntPersistencia persistencia = new Persistencia();
-        
+
         return persistencia.obtenTallas();
     }
 
@@ -225,7 +234,7 @@ public class AdmInventario {
      */
     public List<Modelo> obtenListaModelos() throws Exception {
         IntPersistencia persistencia = new Persistencia();
-        
+
         return persistencia.obtenModelos();
     }
 }
