@@ -1,4 +1,3 @@
-
 package negocios.admInventario;
 
 import java.util.List;
@@ -11,20 +10,20 @@ import pvcco.interfaces.IntAdmInventario;
  *
  * @author Raul Karim Sabag Ballesteros
  */
-public class FacAdmInventario implements IntAdmInventario{
+public class FacAdmInventario implements IntAdmInventario {
 
     private AdmInventario inv;
-    
-    public FacAdmInventario(){
+
+    public FacAdmInventario() {
         inv = new AdmInventario();
     }
-    
+
     /**
-     * Agrega zapatos nuevos al inventario. Si el zapato ya existe, se agregara la cantidad
-     * del inventarioRegular de la talla dada a la existente.
-     * 
+     * Agrega zapatos nuevos al inventario. Si el zapato ya existe, se agregara
+     * la cantidad del inventarioRegular de la talla dada a la existente.
+     *
      * @param talla La talla a agregarse.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void agregarProductoAInventario(Talla talla) throws Exception {
@@ -33,23 +32,23 @@ public class FacAdmInventario implements IntAdmInventario{
 
     /**
      * Elimina zapatos del inventario por causas dadas por la descripcion.
-     * 
+     *
      * @param productos Los zapatos a eliminarse
      * @param cantidades Las cantitades a eliminarse
      * @param descripcion La descripcion de la baja
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void bajaEnInventario(List<Talla> productos, List<Integer> cantidades, String descripcion) throws Exception {
         inv.bajaEnInventario(productos, cantidades, descripcion);
     }
-    
+
     /**
-     * Para cada talla apartada se le restara uno al inventario de apartado y se le sumara uno
-     * al inventario regular.
-     * 
+     * Para cada talla apartada se le restara uno al inventario de apartado y se
+     * le sumara uno al inventario regular.
+     *
      * @param apartado El apartado a modificar.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void modificarPorApartadoCancelado(Apartado apartado) throws Exception {
@@ -57,12 +56,13 @@ public class FacAdmInventario implements IntAdmInventario{
     }
 
     /**
-     * Para cada talla que se va a apartar, se le restara uno al inventario regular y se le sumara
-     * uno al inventario apartado. El unico requisito sera que todas las tallas dentro de la collecion
-     * tienen que tener un ID asignado.
-     * 
+     * Para cada talla que se va a apartar, se le restara uno al inventario
+     * regular y se le sumara uno al inventario apartado. El unico requisito
+     * sera que todas las tallas dentro de la collecion tienen que tener un ID
+     * asignado.
+     *
      * @param apartado El apartado a modificar.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void modificarPorApartadoAgregado(Apartado apartado) throws Exception {
@@ -70,11 +70,11 @@ public class FacAdmInventario implements IntAdmInventario{
     }
 
     /**
-     * Para cada talla del apartado dado por el parametro, se le restara uno al inventario de apartado
-     * ya que este se esta liquidando.
-     * 
+     * Para cada talla del apartado dado por el parametro, se le restara uno al
+     * inventario de apartado ya que este se esta liquidando.
+     *
      * @param apartado El apartado a modificar.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void modificarPorApartadoLiquidado(Apartado apartado) throws Exception {
@@ -82,9 +82,9 @@ public class FacAdmInventario implements IntAdmInventario{
     }
 
     /**
-     * Resta productos por venta del inventario, restandole al inventario regular de cada uno
-     * de los zapatos que se vendieron.
-     * 
+     * Resta productos por venta del inventario, restandole al inventario
+     * regular de cada uno de los zapatos que se vendieron.
+     *
      * @param productos Los productos a modificar su inventario.
      * @param cantidades Las cantidades vendidas.
      */
@@ -94,27 +94,27 @@ public class FacAdmInventario implements IntAdmInventario{
     }
 
     /**
-     * Busca una talla existente con el mismo ID dado por el parametro.
-     * En caso de que no se encuentre se regresara nulo.
-     * 
+     * Busca una talla existente con el mismo ID dado por el parametro. En caso
+     * de que no se encuentre se regresara nulo.
+     *
      * @param talla La talla con el ID a buscar.
      * @return La talla en la base de datos si es que existe.
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Override
     public Talla obten(Talla talla) throws Exception {
         return inv.obten(talla);
     }
 
-     /**
-     * Busca un modelo existente con el mismo ID dado por el parametro.
-     * En caso de que no se encuentre se regresara nulo.
-     * 
+    /**
+     * Busca un modelo existente con el mismo ID dado por el parametro. En caso
+     * de que no se encuentre se regresara nulo.
+     *
      * @param talla El modelo con el ID a buscar.
      * @return El modelo en la base de datos si es que existe.
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Override
     public Modelo obten(Modelo modelo) throws Exception {
@@ -123,24 +123,35 @@ public class FacAdmInventario implements IntAdmInventario{
 
     /**
      * Regresa una lista de todos los registros en Tallas.
-     * 
+     *
      * @return La lista de todas las tallas existentes.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public List<Talla> obtenListaTallas() throws Exception {
         return inv.obtenListaTallas();
     }
-    
+
     /**
      * Regresa una lista de todos los registros en Modelos.
-     * 
+     *
      * @return La lista de todos los modelos existentes.
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public List<Modelo> obtenListaModelos() throws Exception {
         return inv.obtenListaModelos();
+    }
+
+    /**
+     * Este metodo regresa una lista de las tallas de un modelo especifico.
+     *
+     * @param modelo
+     * @return lista de tallas
+     */
+    @Override
+    public List<Talla> obtenTallasDeModelo(Modelo modelo) throws Exception {
+        return inv.obtenTallasDeModelo(modelo);
     }
 
 }

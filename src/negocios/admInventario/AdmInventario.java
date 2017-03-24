@@ -24,6 +24,14 @@ public class AdmInventario {
 
     }
 
+    /**
+     * Este metodo se encarga de agregar un producto al inventario. Este revisa
+     * si el modelo existe, si la talla existe y toma las decisiones en cuanto a
+     * los resultados.
+     *
+     * @param talla
+     * @throws Exception
+     */
     public void agregarProductoAlInventario(Talla talla) throws Exception {
         IntPersistencia persistencia = new Persistencia();
 
@@ -47,6 +55,15 @@ public class AdmInventario {
         }
     }
 
+    /**
+     * Este metodo recibe una lista de Tallas, una lista de cantidades y una
+     * descripcion. Con esta informacion da de baja productos del inventario.
+     *
+     * @param productos
+     * @param cantidades
+     * @param descripcion
+     * @throws Exception
+     */
     public void bajaEnInventario(List<Talla> productos, List<Integer> cantidades, String descripcion) throws Exception {
         IntPersistencia persistencia = new Persistencia();
 
@@ -224,5 +241,19 @@ public class AdmInventario {
         IntPersistencia persistencia = new Persistencia();
 
         return persistencia.obtenModelos();
+    }
+
+    /**
+     * Este metodo regresa una lista de las tallas de un modelo especifico.
+     * @param modelo
+     * @return lista de tallas
+     */
+    List<Talla> obtenTallasDeModelo(Modelo modelo) {
+        try {
+            IntPersistencia persistencia = new Persistencia();
+            return persistencia.obtenTallasDeModelo(modelo);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
