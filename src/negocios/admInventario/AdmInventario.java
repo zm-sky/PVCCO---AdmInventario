@@ -27,36 +27,24 @@ public class AdmInventario {
     public void agregarProductoAlInventario(Talla talla) throws Exception {
         IntPersistencia persistencia = new Persistencia();
 
-        //Vamos a checar si la talla ya existe dentro de la base de datos. En dado caso
-        //de que si exista, no se debe agregar como un nuevo modelo, sino el inventario
-        //regular de el existente se actualizara a la cantidad de la talla dada por el
-        //parametro.
-        Talla existente = persistencia.obten(talla);
-
-        //Si existe la talla dentro de la base de datos, no nos dara null..
-        if (existente != null) {
-            //Ahora vamos a checar si el modelo de esta talla es igual a la que se quiere agregar.
-            //En dado caso, tenemos que actualizar la cantidad del producto de esa talla.
-            if (existente.getIdModelo().getIdModelo().equalsIgnoreCase(talla.getIdModelo().getIdModelo())) {
+        //Se empieza trayendo de la base de datos un Modelo que tenga el mismo 
+        //nombre que el modelo de la talla
+        Modelo modeloExistente = persistencia.obtenModeloPorNombre(talla.getIdModelo());
+        //Si la base de datos no encontro un modelo no se entra al if
+        if (modeloExistente != null) {
+            talla.setIdModelo(modeloExistente);
+            Talla existente = persistencia.obtenTallaPorTalla(talla);
+            if (existente != null) {
                 int nuevoInventario = existente.getInventarioRegular() + talla.getInventarioRegular();
                 existente.setInventarioRegular(nuevoInventario);
                 persistencia.actualizar(existente);
-
-                return;
+            } else {
+                persistencia.agregar(talla);
             }
-        }
-
-        /**
-         * Se trae el modelo con el mismo id que el modelo de la talla, si el
-         * modelo no existe este se agrega a la base de datos.
-         */
-        Modelo modeloExistente = persistencia.obten(talla.getIdModelo());
-        if (modeloExistente == null) {
+        } else {
             persistencia.agregar(talla.getIdModelo());
+            persistencia.agregar(talla);
         }
-
-        //Si no existe, simplemente vamos a agregar un nuevo registro de la talla.
-        persistencia.agregar(talla);
     }
 
     public void bajaEnInventario(List<Talla> productos, List<Integer> cantidades, String descripcion) throws Exception {
