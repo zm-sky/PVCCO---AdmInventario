@@ -119,7 +119,7 @@ public class AdmInventario {
         IntPersistencia persistencia = new Persistencia();
 
         //Para cada talla apartada del apartado, tenemos que modificar el inventario.
-        for (TallaApartado tallaApartada : apartado.getTallaApartadoCollection()) {
+        for (TallaApartado tallaApartada : apartado.getTallaapartadoList()) {
             //Esto es por si la talla en si esta vacia, y solamente se le asigno un ID.
             Talla talla = persistencia.obten(tallaApartada.getIdTalla());
 
@@ -142,7 +142,7 @@ public class AdmInventario {
     public void modificarPorApartadoLiquidado(Apartado apartado) throws Exception {
         IntPersistencia persistencia = new Persistencia();
 
-        for (TallaApartado tallaApartada : apartado.getTallaApartadoCollection()) {
+        for (TallaApartado tallaApartada : apartado.getTallaapartadoList()) {
             Talla talla = tallaApartada.getIdTalla();
 
             talla.setInventarioApartado(talla.getInventarioApartado() - 1);
@@ -160,7 +160,7 @@ public class AdmInventario {
     public void modificarPorApartadoCancelado(Apartado apartado) throws Exception {
         IntPersistencia persistencia = new Persistencia();
 
-        for (TallaApartado tallaApartada : apartado.getTallaApartadoCollection()) {
+        for (TallaApartado tallaApartada : apartado.getTallaapartadoList()) {
             Talla talla = tallaApartada.getIdTalla();
 
             talla.setInventarioApartado(talla.getInventarioApartado() - 1);
